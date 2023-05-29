@@ -31,6 +31,7 @@ function listing() {
         let content = a["overview"];
         let image = a["poster_path"];
         let rate = a["vote_average"];
+        let id = a["id"];
 
         let temp_html = `<div class="col">
                                 <div class="card h-100">
@@ -44,20 +45,17 @@ function listing() {
                                 </div>
                             </div>`;
         cardBox.insertAdjacentHTML('beforeend', temp_html);
+        const clickCardBox = cardBox.lastElementChild;
+        clickCardBox.addEventListener('click', () => clickCard(id));
       });
     });
 }
 
-listing();
-
-// alert창
-const clickcard = document.querySelector("div.col");
-
-function idAlert() {
-  alert(`영화id: `);
+function clickCard(id) {
+  alert(`id = ${id}`);
 }
 
-clickcard.addEventListener("click", idAlert);
+listing();
 
 // // 검색-표시 함수
 // function searchList(val) {
@@ -83,7 +81,7 @@ clickcard.addEventListener("click", idAlert);
 
 // console.log(searchList('god'));
 
-//검색기능
+// // 검색기능
 // const searchInput = document.getElementById('movieName')
 // const searchBtn = document.getElementById('searchbtn')
 
