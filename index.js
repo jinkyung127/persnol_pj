@@ -7,13 +7,13 @@ const options = {
   },
 };
 
-fetch(
-  "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-  options
-)
-  .then((response) => response.json())
-  .then((response) => console.log(response))
-  .catch((err) => console.error(err));
+// fetch(
+//   "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+//   options
+// )
+//   .then((response) => response.json())
+//   .then((response) => console.log(response))
+//   .catch((err) => console.error(err));
 
 function listing() {
   fetch(
@@ -22,8 +22,10 @@ function listing() {
   )
     .then((response) => response.json())
     .then((data) => {
+      console.log(data)
       let rows = data["results"];
-      document.getElementById("cards-box").innerHTML = '';
+      const cardBox = document.querySelector("#cards-box");
+      cardBox.innerHTML = '';
       rows.forEach((a) => {
         let title = a["title"];
         let content = a["overview"];
@@ -32,7 +34,7 @@ function listing() {
 
         let temp_html = `<div class="col">
                                 <div class="card h-100">
-                                    <img src="${image}"
+                                    <img src="https://image.tmdb.org/t/p/w500${image}"
                                         class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">${title}</h5>
@@ -41,42 +43,52 @@ function listing() {
                                     </div>
                                 </div>
                             </div>`;
-        document.getElementById("cards-box").append(temp_html);
+        cardBox.insertAdjacentHTML('beforeend', temp_html);
       });
     });
 }
 
-// listing();
+listing();
 
-function searchList(val) {
-  list.innerHTML='';
-  const res = options.forEach(options => {
-    if(options.title.includes(val)) {
-      const li = document.createElement('li');
-      li.innerHTML=`<div class="col">
-                        <div class="card h-100">
-                            <img src="${image}"
-                                  class="card-img-top">
-                            <div class="card-body">
-                                  <h5 class="card-title">${title}</h5>
-                                  <p class="card-text">${content}</p>
-                                  <p>${rate}</p>
-                            </div>
-                        </div>
-                    </div>`
-      list.appendChild(li);
-    }
-  }) // end showList
+// alert창
+const clickcard = document.querySelector("div.col");
+
+function idAlert() {
+  alert(`영화id: `);
 }
 
-// showList();
+clickcard.addEventListener("click", idAlert);
+
+// // 검색-표시 함수
+// function searchList(val) {
+//   list.innerHTML='';
+//   const res = options.forEach(options => {
+//     if(options.title.includes(val)) {
+//       const li = document.createElement('li');
+//       li.innerHTML=`<div class="col">
+//                         <div class="card h-100">
+//                             <img src="${image}"
+//                                   class="card-img-top">
+//                             <div class="card-body">
+//                                   <h5 class="card-title">${title}</h5>
+//                                   <p class="card-text">${content}</p>
+//                                   <p>${rate}</p>
+//                             </div>
+//                         </div>
+//                     </div>`
+//       list.appendChild(li);
+//     }
+//   }) // end showList
+// }
+
+// console.log(searchList('god'));
 
 //검색기능
-const searchInput = document.getElementById('movieName')
-const searchBtn = document.getElementById('searchbtn')
+// const searchInput = document.getElementById('movieName')
+// const searchBtn = document.getElementById('searchbtn')
 
-searchBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  const val = searchInput.ariaValueMax;
-  console.log(val);
-})
+// searchBtn.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   const val = searchInput.ariaValueMax;
+//   console.log(val);
+// })
