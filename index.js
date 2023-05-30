@@ -45,7 +45,7 @@ function listing() {
 }
 // alert 카드 id 함수 선언
 function clickCard(id) { 
-  alert(`id = ${id}`);
+  alert(`id : ${id}`);
 }
 // 카드 붙이는 함수 실행
 listing();
