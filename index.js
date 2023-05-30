@@ -7,14 +7,6 @@ const options = {
   },
 };
 
-// fetch(
-//   "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-//   options
-// )
-//   .then((response) => response.json())
-//   .then((response) => console.log(response))
-//   .catch((err) => console.error(err));
-
 function listing() {
   fetch(
     "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
@@ -57,36 +49,64 @@ function clickCard(id) {
 
 listing();
 
-// // 검색-표시 함수
-// function searchList(val) {
-//   list.innerHTML='';
-//   const res = options.forEach(options => {
-//     if(options.title.includes(val)) {
-//       const li = document.createElement('li');
-//       li.innerHTML=`<div class="col">
-//                         <div class="card h-100">
-//                             <img src="${image}"
-//                                   class="card-img-top">
-//                             <div class="card-body">
-//                                   <h5 class="card-title">${title}</h5>
-//                                   <p class="card-text">${content}</p>
-//                                   <p>${rate}</p>
-//                             </div>
-//                         </div>
-//                     </div>`
-//       list.appendChild(li);
-//     }
-//   }) // end showList
-// }
+function searchMovie() {
+  const searchBox = document.getElementById('searchinput').value;
+  const movieCardBox = document.getElementById('cards-box');
+  movieCardBox.innerHTML = '';
 
-// console.log(searchList('god'));
+  fetch(
+    `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1`,
+    options
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      let results = data['results'];
+      if (searchBox.length === 0) {
+        alert('한글자 이상 적어주세요');
+      }
+      const filteredResults = results
+        .map((item) => ({
+          movieTitle: item['title'],
+          movieDesc: item['overview'],
+          movieRate: item['vote_average'],
+          movieImg: item['poster_path'],
+          movieId: item['id'],
+        }))
+        .filter((movie) => movie.movieTitle.includes(searchBox));
+      if (filteredResults.length === 0) {
+        alert('일치하는 검색결과가 없습니다');
+        window.location.reload();
+      }
+      filteredResults.forEach((movie) => {
+        let temp_html = `<div class="col">
+                           <div class="card h-100">
+                               <img src="https://image.tmdb.org/t/p/w500${movie.movieImg}"
+                                  class="card-img-top" />
+                               <div class="card-body">
+                                  <h5 class="card-title">${movie.movieTitle}</h5>
+                                  <p class="card-text">${movie.movieDesc}</p>
+                                  <p>${movie.movieRate}</p>
+                              </div>
+                          </div>
+                      </div>`;
+        movieCardBox.insertAdjacentHTML('beforeend', temp_html);
+        const clickCardBox = movieCardBox.lastElementChild;
+        clickCardBox.addEventListener('click', () => clickCard(movie.movieId));
+      });
+    });
+}
 
-// // 검색기능
-// const searchInput = document.getElementById('movieName')
-// const searchBtn = document.getElementById('searchbtn')
+const clickButton = document.getElementById('searchbtn');
+clickButton.addEventListener('click', searchMovie);
 
-// searchBtn.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   const val = searchInput.ariaValueMax;
-//   console.log(val);
-// })
+const searchBox = document.getElementById('searchinput');
+searchBox.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    searchMovie();
+  }
+});
+
+const main = () => {
+  window.location.reload();
+};
