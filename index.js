@@ -55,52 +55,52 @@ function searchMovie() {
   movieCardBox.innerHTML = '';
 
   fetch(
-    `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1`,
+    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
     options
   )
     .then((response) => response.json())
     .then((data) => {
       let results = data['results'];
       if (searchBox.length === 0) {
-        alert('한글자 이상 적어주세요');
+        alert('한 글자 이상 적어주세요');
       }
       const filteredResults = results
         .map((item) => ({
-          movieTitle: item['title'],
-          movieDesc: item['overview'],
-          movieRate: item['vote_average'],
-          movieImg: item['poster_path'],
-          movieId: item['id'],
+          title: item['title'],
+          content: item['overview'],
+          image: item['poster_path'],
+          rate: item['vote_average'],
+          id: item['id'],
         }))
-        .filter((movie) => movie.movieTitle.includes(searchBox));
+        .filter((movie) => movie.title.includes(searchBox));
       if (filteredResults.length === 0) {
-        alert('일치하는 검색결과가 없습니다');
+        alert('일지하는 검색결과가 없습니다');
         window.location.reload();
       }
       filteredResults.forEach((movie) => {
         let temp_html = `<div class="col">
-                           <div class="card h-100">
-                               <img src="https://image.tmdb.org/t/p/w500${movie.movieImg}"
-                                  class="card-img-top" />
-                               <div class="card-body">
-                                  <h5 class="card-title">${movie.movieTitle}</h5>
-                                  <p class="card-text">${movie.movieDesc}</p>
-                                  <p>${movie.movieRate}</p>
-                              </div>
-                          </div>
-                      </div>`;
+                                <div class="card h-100">
+                                    <img src="https://image.tmdb.org/t/p/w500${movie.image}"
+                                        class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${movie.title}</h5>
+                                        <p class="card-text">${movie.content}</p>
+                                        <p>${movie.rate}</p>
+                                    </div>
+                                </div>
+                            </div>`;
         movieCardBox.insertAdjacentHTML('beforeend', temp_html);
         const clickCardBox = movieCardBox.lastElementChild;
-        clickCardBox.addEventListener('click', () => clickCard(movie.movieId));
+        clickCardBox.addEventListener('click', () => clickCard(movie.id));
       });
     });
 }
 
-const clickButton = document.getElementById('searchbtn');
-clickButton.addEventListener('click', searchMovie);
+const searchButton = document.getElementById('searchbtn');
+searchButton.addEventListener('click', searchMovie);
 
-const searchBox = document.getElementById('searchinput');
-searchBox.addEventListener('keypress', (event) => {
+const searchIpt = document.getElementById('searchinput');
+searchIpt.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();
     searchMovie();
