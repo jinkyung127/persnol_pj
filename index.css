@@ -1,14 +1,18 @@
+/* 폰트 */
 * {
   font-family: 'Gowun Dodum', sans-serif;
 }
 
+/* 배경 */
 body{
   background-image: 
             url("http://cdn.edujin.co.kr/news/photo/202301/41207_83558_282.jpg");
   background-position: center;
-  margin: 0;
+  /* 헤더를 div로 분류해서 여백이 생김. 여백 없애기 위해 margin을 0으로 둠 */
+  margin: 0; 
 }
 
+/* 헤더 */
 .header{
   width: 100%;
   height: 100px;
@@ -20,18 +24,21 @@ body{
   color:rgb(59, 62, 108);
 }
 
+/* 검색 창 */
 .searchBox{
   width: 500px;
+  /* 입력창과 버튼을 가로 정렬 */
   display: flex;
-  align-items: end;
   margin: 20px auto 20px auto;
 }
 
+/* 검색 입력 창 */
 .searchipt{
   width: 300px;
   height: 30px;
   margin-left: 20px;
   background-color: white;
+  /* 입력 시 테두리 생성 */
   border: 2px solid var(--primay-color);
   padding: 0.5rem 1rem;
   border-radius: 50px;
@@ -39,6 +46,7 @@ body{
   color: black;
 }
 
+/* 검색 버튼 */
 .searchbtn{
   width: 80px;
   height: 45px;
@@ -51,11 +59,13 @@ body{
   font-size: large;
 }
 
+/* 버튼 커서 올릴 시 호버 효과 */
 .searchbtn:hover{
   box-shadow: 0 80px 0 0  rgba(0,0,0,0.25) inset, 
               0 -80px 0 0 rgba(0,0,0,0.25) inset;
 }
 
+/* 카드 박스 전체 */
 .mycards {
   margin: 20px auto 0px auto;
   width: 90%;
@@ -65,22 +75,34 @@ body{
   align-items: center;
 }
 
+/* 카드 박스 한 개 + 여백 */
 .row{
   display: flex;
+  /* 행 개수 정하기 */
   justify-content: space-between;
+  /* 열 여러개로 나누기 */
   flex-wrap: wrap; 
 }
 
+/* 카드 박스 한 개 */
 .col{
   background-color: rgb(59, 62, 108);
   border-radius: 20px;
   padding: 15px 20px 10px 20px;
+  /* 행 개수 4개로 두기 위해 적절한 가로 폭 */
   width: 20%;
   margin-bottom: 30px;
   color: white;
 }
 
+/* 카드 이미지 */
 .card-img-top{
   border-radius: 10px;
   width: 100%;
+}
+
+.card-text{
+  /* 내용박스 줄이기 + 스크롤 */
+  overflow: auto;
+  height: 100px;
 }

@@ -14,15 +14,16 @@
 </head>
 <body>
   <!-- 헤더 -->
-  <div class="header" onclick="main()">
+  <div class="header" onclick="main()"> <!-- 클릭 : main() 호출 : F5 -->
     <h1><b>Top Ranking Movie</b></h1>
   </div>
 
   <!-- 검색박스 -->
   <div class="searchBox">
     <div class="input-group">
-      <input type="text" class="searchipt" id="searchinput" placeholder="영화 제목을 검색해 보세요">
-      <button class="searchbtn" id="searchbtn" type="button" id="button-addon2">검색</button>
+      <!-- autofocus : 자동 커서 -->
+      <input type="text" class="searchipt" id="searchinput" placeholder="영화 제목을 검색해 보세요" autofocus>
+      <button class="searchbtn" id="searchbtn" type="button">검색</button>
     </div>
   </div>
   <hr class="bar">
@@ -41,6 +42,7 @@
             </div>
         </div>
   </div>
+  <!-- 부트스트랩 없이 구현! -->
   
 <!-- 자바스크립트 -->
   <script src="index.js"></script>
