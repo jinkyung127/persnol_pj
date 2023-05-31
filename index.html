@@ -4,42 +4,35 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>내배캠 최고 평점 영화 콜렉션</title>
+  <title>Top Ranking Movie</title>
   
   <!-- CSS -->
   <link rel="stylesheet" href="index.css" /> 
 
-  <!-- 부트스트랩 -->
-  <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-  crossorigin="anonymous"
-  />
   <!-- 폰트 -->
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- 헤더 -->
-  <div class="header"  onclick="main()">
-    <h2><b>내배캠 최고 평점 영화 콜렉션</b></h2>
+  <div class="header" onclick="main()">
+    <h1><b>Top Ranking Movie</b></h1>
   </div>
 
   <!-- 검색박스 -->
   <div class="searchBox">
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" id="searchinput" placeholder="영화 제목을 검색해 보세요" aria-label="영화 제목을 검색해 보세요" aria-describedby="button-addon2">
-      <button class="btn btn-outline-secondary" id="searchbtn" type="button" id="button-addon2">검색</button>
+    <div class="input-group">
+      <input type="text" class="searchipt" id="searchinput" placeholder="영화 제목을 검색해 보세요">
+      <button class="searchbtn" id="searchbtn" type="button" id="button-addon2">검색</button>
     </div>
   </div>
   <hr class="bar">
   
   <!-- 카드 -->
   <div class="mycards">
-    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+    <div class="row" id="cards-box">
         <div class="col">
             <div class="card h-100">
-                <img src="https://previews.123rf.com/images/montego/montego1412/montego141200081/34165506-%EC%98%81%ED%99%94-%ED%95%84%EB%A6%84%EA%B3%BC-%EB%B0%95%EC%88%98-%EB%B3%B4%EB%93%9C-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EB%90%9C-3d-%EA%B7%B8%EB%A6%BC.jpg"
+                <img src=""
                     class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">영화 제목이 들어갑니다</h5>

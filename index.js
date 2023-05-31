@@ -54,8 +54,9 @@ listing();
 // 검색 함수 선언
 function searchMovie() {
   const searchBox = document.getElementById('searchinput').value; // 검색 input값 받아오기
+  console.log(searchBox);
   const movieCardBox = document.getElementById('cards-box'); // html에서 카드 찾기
-  movieCardBox.innerHTML = ''; // 기존 카드 지우기
+  movieCardBox.textContent = ''; // 기존 카드 지우기
 
   fetch(
     'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1',
@@ -87,7 +88,7 @@ function searchMovie() {
       // 필터링한 배열만 카드로 붙이기
       filteredResults.forEach((movie) => {
         let temp_html = `<div class="col">
-                                <div class="card h-100">
+                                <div class="card h-100" id="card-${movie.id}">
                                     <img src="https://image.tmdb.org/t/p/w500${movie.image}"
                                         class="card-img-top">
                                     <div class="card-body">
@@ -98,7 +99,7 @@ function searchMovie() {
                                 </div>
                             </div>`;
         movieCardBox.insertAdjacentHTML('beforeend', temp_html);
-        const clickCardBox = movieCardBox.lastElementChild;
+        const clickCardBox = document.getElementById(`card-${movie.id}`);
         clickCardBox.addEventListener('click', () => clickCard(movie.id));
       });
     });

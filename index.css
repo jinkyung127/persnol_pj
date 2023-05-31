@@ -5,8 +5,8 @@
 body{
   background-image: 
             url("http://cdn.edujin.co.kr/news/photo/202301/41207_83558_282.jpg");
-  background-position: center 30%;
-  background-size: cover;
+  background-position: center;
+  margin: 0;
 }
 
 .header{
@@ -16,33 +16,71 @@ body{
         background-color: rgba( 255, 255, 255, 0.5 );
   display: flex;
   justify-content: center;
-  padding-top: 25px;
+  padding-top: 10px;
+  color:rgb(59, 62, 108);
 }
 
 .searchBox{
   width: 500px;
   display: flex;
-  align-items: center;
-  margin: 20px auto 0px auto;
+  align-items: end;
+  margin: 20px auto 20px auto;
 }
 
 .searchipt{
-  width: 250px;
+  width: 300px;
   height: 30px;
   margin-left: 20px;
-  margin-right: 20px;
+  background-color: white;
+  border: 2px solid var(--primay-color);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  color: black;
 }
 
 .searchbtn{
-  width: 50px;
-  height: 30px;
+  width: 80px;
+  height: 45px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: rgb(91, 89, 160);
+  border: 2px solid var(--primay-color);
+  border-radius: 50px;
+  color: white;
+  font-size: large;
+}
+
+.searchbtn:hover{
+  box-shadow: 0 80px 0 0  rgba(0,0,0,0.25) inset, 
+              0 -80px 0 0 rgba(0,0,0,0.25) inset;
 }
 
 .mycards {
   margin: 20px auto 0px auto;
-  width: 95%;
-  max-width: 1200px;
+  width: 90%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; 
+}
+
+.col{
+  background-color: rgb(59, 62, 108);
+  border-radius: 20px;
+  padding: 15px 20px 10px 20px;
+  width: 20%;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.card-img-top{
+  border-radius: 10px;
+  width: 100%;
 }
