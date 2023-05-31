@@ -1,52 +1,54 @@
 const options = {
-  method: "GET",
+  method: 'GET',
   headers: {
-    accept: "application/json",
+    accept: 'application/json',
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NjAwYjljMmY0NzA2MzIzMDdkNTk5Y2E2MDU1YWM4NSIsInN1YiI6IjY0NzM0ZDM0YmUyZDQ5MDBhN2Q2MzgzNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.904cgBblGnOetTZ00BRWJnlIigPpKGEFzmBXQRjeYHk",
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NjAwYjljMmY0NzA2MzIzMDdkNTk5Y2E2MDU1YWM4NSIsInN1YiI6IjY0NzM0ZDM0YmUyZDQ5MDBhN2Q2MzgzNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.904cgBblGnOetTZ00BRWJnlIigPpKGEFzmBXQRjeYHk',
   },
 };
 
 // 영화 api 받아서 카드 붙이기
 function listing() {
   fetch(
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+    'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1',
     options
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
-      let rows = data["results"];
-      const cardBox = document.querySelector("#cards-box"); 
-      cardBox.innerHTML = ''; // 기존 카드 지우기
-      rows.forEach((a) => {
-        let title = a["title"];
-        let content = a["overview"];
-        let image = a["poster_path"];
-        let rate = a["vote_average"];
-        let id = a["id"];
+      console.log(data);
+      let rows = data['results'];
+      const cardBox = document.getElementById('cards-box');
+      cardBox.textContent = ''; // 기존 카드 지우기
+      rows.forEach((movie) => {
+        let title = movie['title'];
+        let content = movie['overview'];
+        let image = movie['poster_path'];
+        let rate = movie['vote_average'];
+        let id = movie['id'];
 
         let temp_html = `<div class="col">
-                                <div class="card h-100">
-                                    <img src="https://image.tmdb.org/t/p/w500${image}"
-                                        class="card-img-top">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${title}</h5>
-                                        <p class="card-text">${content}</p>
-                                        <p>${rate}</p>
-                                    </div>
-                                </div>
-                            </div>`;
-        cardBox.insertAdjacentHTML('beforeend', temp_html); // jquery의 append기능
-        const clickCardBox = cardBox.lastElementChild; // 카드 클릭 함수 실행할 변수 선언
-        clickCardBox.addEventListener('click', () => clickCard(id)); // 카드 클릭 이벤트 실행
+                            <div class="card h-100" id="card-${id}">
+                              <img src="https://image.tmdb.org/t/p/w500${image}"
+                                  class="card-img-top">
+                              <div class="card-body">
+                                  <h5 class="card-title">${title}</h5>
+                                  <p class="card-text">${content}</p>
+                                  <p>${rate}</p>
+                              </div>
+                            </div>
+                          </div>`;
+        cardBox.insertAdjacentHTML('beforeend', temp_html);
+        const clickCardBox = document.getElementById(`card-${id}`);
+        clickCardBox.addEventListener('click', () => clickCard(id));
       });
     });
 }
+
 // alert 카드 id 함수 선언
-function clickCard(id) { 
-  alert(`id : ${id}`);
+function clickCard(id) {
+  alert(`id: ${id}`);
 }
+
 // 카드 붙이는 함수 실행
 listing();
 // 검색 함수 선언
@@ -56,7 +58,7 @@ function searchMovie() {
   movieCardBox.innerHTML = ''; // 기존 카드 지우기
 
   fetch(
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+    'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1',
     options
   )
     .then((response) => response.json())
@@ -66,7 +68,7 @@ function searchMovie() {
         alert('한 글자 이상 적어주세요'); // 입력값 없는 경우
       }
       const filteredResults = results
-      // map() 으로 카드 배열 생성
+        // map() 으로 카드 배열 생성
         .map((item) => ({
           title: item['title'],
           content: item['overview'],
@@ -75,7 +77,9 @@ function searchMovie() {
           id: item['id'],
         }))
         // filter() 로 검색 인풋이 포함된 타이틀이 있는 배열만 반환
-        .filter((movie) => movie.title.toLowerCase().includes(searchBox.toLowerCase()));
+        .filter((movie) =>
+          movie.title.toLowerCase().includes(searchBox.toLowerCase())
+        );
       if (filteredResults.length === 0) {
         alert('일지하는 검색결과가 없습니다'); // 인풋이 포함된 제목 값이 없을 경우
         window.location.reload();
