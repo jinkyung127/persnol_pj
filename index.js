@@ -54,6 +54,7 @@ function clickCard(id) {
 // 카드 붙이는 함수 실행
 listing();
 // 검색 함수 선언
+// 검색과 팀원분의 도움을 받았지만 구현하고 이해하는데 어려움을 겪음
 function searchMovie() {
   const searchBox = document.getElementById('searchinput').value; // 검색 input 값 받아오기
   console.log(searchBox); // input값 확인
