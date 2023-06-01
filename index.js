@@ -19,7 +19,6 @@ function listing() {
       console.log(data);
       let rows = data['results'];
       const cardBox = document.getElementById('cards-box');
-      cardBox.textContent = ''; // 기존 카드 지우기
       rows.forEach((movie) => {
         let title = movie['title'];
         let content = movie['overview'];
@@ -83,7 +82,9 @@ function searchMovie() {
         }))
         // filter() 로 검색 인풋값이 포함된 타이틀이 있는 배열만 반환
         .filter((movie) =>
-          movie.title.replace(/ /g,"").toLowerCase().replace(/ /g,"").includes(searchBox.toLowerCase()) // .toLowerCase() 를 사용해서 영화 제목과 인풋값을 모두 소문자로 받아 비교
+          movie.title.replace(/ /g,"").toLowerCase().replace(/ /g,"").includes(searchBox.toLowerCase()) 
+          // .toLowerCase() 를 사용해서 영화 제목과 인풋값을 모두 소문자로 받아 비교
+          // .replace(/ /g,"") 를 사용해서 공백 없이 검색 허용
         );
       if (filteredResults.length === 0) {
         alert('일지하는 검색결과가 없습니다'); // 인풋이 포함된 제목 값이 없을 경우
